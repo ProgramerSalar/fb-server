@@ -63,6 +63,12 @@ exports.register = async (req, res) => {
       bDay,
       gender,
     }).save();
+    const emailVerificationToken = generateToken(
+      { id: user._id.toString() },
+      "30"
+    );
+    console.log(emailVerificationToken);
+
     res.json(user);
   } catch (error) {
     res.status(500).json({ message: error.message });
